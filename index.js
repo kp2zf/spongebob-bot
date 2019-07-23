@@ -1,6 +1,6 @@
 const { text } = require('micro')
 const { parse } = require('querystring')
-const appendFoo = require('./lib/eval').default.default
+const appendFoo = require('./lib/eval')
 
 module.exports = async (req, res) => {
   // Parse code received through req
@@ -15,7 +15,7 @@ module.exports = async (req, res) => {
 
     result = error.message
     attachments = [{ text: error.stack }]
-    
+
   }
 
   const message = '\`' + body.text + '\`: ' + result
