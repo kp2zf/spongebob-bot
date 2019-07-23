@@ -6,7 +6,7 @@ const { appendFoo } = require('./lib/eval')
 module.exports = async (req, res) => {
   // Parse code received through req
   // const body = parse(await text(req))
-  res.end(req.body)
+  res.send("hello")
 
   // let result, attachments
 
