@@ -5,9 +5,10 @@ const { appendFoo } = require('./lib/eval')
 
 module.exports = (req, res) => {
   // Parse code received through req
-  console.log(req)
-  console.log(req.getBody());
-  // const { body } = req;
+  const { body } = req;
+  if (!body){
+    res.send(400)
+  }
   // let result, attachments
 
   // try {
