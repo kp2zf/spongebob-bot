@@ -1,6 +1,7 @@
 const { text } = require('micro')
 const { parse } = require('querystring')
-const appendFoo = require('./lib/eval')
+const { appendFoo } = require('./lib/eval')
+
 
 module.exports = async (req, res) => {
   // Parse code received through req
