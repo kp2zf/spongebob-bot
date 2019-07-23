@@ -8,6 +8,10 @@ module.exports = (req, res) => {
   const { body } = req;
   if (!body){
     res.send(400)
+    
+  }
+  else {
+    res.send("hello")
   }
   // let result, attachments
 
@@ -25,6 +29,5 @@ module.exports = (req, res) => {
   // const response_type = 'in_channel'
 
   // res.writeHead(200, { 'Content-Type': 'application/json' })
-  // Create response object and send result back to Slack
-  res.send("hello")
+
 }
