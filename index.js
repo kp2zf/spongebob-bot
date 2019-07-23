@@ -6,11 +6,11 @@ const { appendFoo } = require('./lib/eval')
 module.exports = (req, res) => {
   // Parse code received through req
   // console.log(req)
-  // const { body } = req;
+  const { body } = req;
   // let result, attachments
 
   // try {
-  //   console.log(body)
+  console.log(body)
   //   result = appendFoo(body.text)
 
   // } catch (error) {
