@@ -5,24 +5,24 @@ const { appendFoo } = require('./lib/eval')
 
 module.exports = (req, res) => {
   // Parse code received through req
-  
-  const { body } = req;
-  let result, attachments
+  console.log(req)
+  // const { body } = req;
+  // let result, attachments
 
-  try {
-    console.log(body)
-    result = appendFoo(body.text)
+  // try {
+  //   console.log(body)
+  //   result = appendFoo(body.text)
 
-  } catch (error) {
+  // } catch (error) {
 
-    result = error.message
-    attachments = [{ text: error.stack }]
+  //   result = error.message
+  //   attachments = [{ text: error.stack }]
 
-  }
+  // }
 
-  const response_type = 'in_channel'
+  // const response_type = 'in_channel'
 
   res.writeHead(200, { 'Content-Type': 'application/json' })
   // Create response object and send result back to Slack
-  res.end(JSON.stringify({ response_type, text: result, attachments }))
+  res.end(JSON.stringify({ response_type, text: "hello", attachments }))
 }
