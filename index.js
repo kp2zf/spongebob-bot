@@ -5,11 +5,12 @@ const { appendFoo } = require('./lib/eval')
 
 module.exports = async (req, res) => {
   // Parse code received through req
+  console.log(JSON.stringify(req));
   const body = parse(await text(req))
   let result, attachments
 
   try {
-    console.log(appendFoo)
+    console.log(body)
     result = appendFoo(body.text)
 
   } catch (error) {
