@@ -22,7 +22,7 @@ module.exports = (req, res) => {
 
   // const response_type = 'in_channel'
 
-  res.writeHead(200, { 'Content-Type': 'application/json' })
+  // res.writeHead(200, { 'Content-Type': 'application/json' })
   // Create response object and send result back to Slack
   res.send("hello")
 }
