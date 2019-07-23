@@ -3,10 +3,10 @@ const { parse } = require('querystring')
 const { appendFoo } = require('./lib/eval')
 
 
-module.exports = async (req, res) => {
+module.exports = (req, res) => {
   // Parse code received through req
-  console.log(JSON.stringify(req));
-  const body = parse(await text(req))
+  
+  const { body } = req;
   let result, attachments
 
   try {
@@ -20,10 +20,9 @@ module.exports = async (req, res) => {
 
   }
 
-  const message = '\`' + body.text + '\`: ' + result
   const response_type = 'in_channel'
 
   res.writeHead(200, { 'Content-Type': 'application/json' })
   // Create response object and send result back to Slack
-  res.end(JSON.stringify({ response_type, text: message, attachments }))
+  res.end(JSON.stringify({ response_type, text: result, attachments }))
 }
