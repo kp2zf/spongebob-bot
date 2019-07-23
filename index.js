@@ -3,16 +3,11 @@ const { parse } = require('querystring')
 const { appendFoo } = require('./lib/eval')
 
 
-module.exports = (req, res) => {
+module.exports = async (req, res) => {
   // Parse code received through req
-  const { body } = req;
-  if (!body){
-    res.send(400)
-    
-  }
-  else {
-    res.send("hello")
-  }
+  const body = parse(await text(req))
+  res.send(body)
+
   // let result, attachments
 
   // try {
