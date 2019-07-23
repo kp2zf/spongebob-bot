@@ -8,8 +8,8 @@ module.exports = async (req, res) => {
   let result, attachments
 
   try {
-
-    result = appendFoo(body.text, 2500)
+    console.log(appendFoo)
+    result = appendFoo(body.text)
 
   } catch (error) {
 
