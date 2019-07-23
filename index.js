@@ -1,4 +1,4 @@
-const { text } = require('micro')
+// const { text } = require('micro')
 const { parse } = require('querystring')
 const evaluateIncomingJS = require('./lib/eval').default.default
 
