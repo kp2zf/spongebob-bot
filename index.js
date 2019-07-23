@@ -5,7 +5,7 @@ const { appendFoo } = require('./lib/eval')
 
 module.exports = (req, res) => {
   // Parse code received through req
-  console.log(req)
+  // console.log(req)
   // const { body } = req;
   // let result, attachments
 
@@ -24,5 +24,5 @@ module.exports = (req, res) => {
 
   res.writeHead(200, { 'Content-Type': 'application/json' })
   // Create response object and send result back to Slack
-  res.end(JSON.stringify({ response_type, text: "hello", attachments }))
+  res.send("hello")
 }
