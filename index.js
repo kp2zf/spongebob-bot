@@ -1,6 +1,6 @@
-// const { text } = require('micro')
+const { text } = require('micro')
 const { parse } = require('querystring')
-const evaluateIncomingJS = require('./lib/eval').default.default
+const appendFoo = require('./lib/eval').default.default
 
 module.exports = async (req, res) => {
   // Parse code received through req
@@ -8,12 +8,14 @@ module.exports = async (req, res) => {
   let result, attachments
 
   try {
-    // Pass code to function imported through eval
-    result = evaluateIncomingJS(body.text, 2500)
+
+    result = appendFoo(body.text, 2500)
+
   } catch (error) {
-    // Capture any errors
+
     result = error.message
     attachments = [{ text: error.stack }]
+    
   }
 
   const message = '\`' + body.text + '\`: ' + result
