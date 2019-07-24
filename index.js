@@ -7,7 +7,7 @@ module.exports = async (req, res) => {
   // Parse code received through req
   // const body = parse(await text(req))
   console.log(req)
-  res.send("yo")
+  res.send(JSON.stringify(req))
 
   // let result, attachments
 
