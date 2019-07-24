@@ -21,6 +21,7 @@
   "homepage": "https://github.com/kp2zf/spongebob-bot#readme",
   "dependencies": {
     "micro": "^9.3.4",
+    "now": "^15.8.5",
     "querystring": "^0.2.0"
   }
 }
