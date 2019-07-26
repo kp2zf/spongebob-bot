@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/Users/kushpatel/Documents/Flask_Tutorial/venv"
+VIRTUAL_ENV="/Users/kushpatel/Documents/GitHub/spongebob-bot/venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

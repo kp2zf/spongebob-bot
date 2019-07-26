@@ -29,7 +29,7 @@ end
 # unset irrelevant variables
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/Users/kushpatel/Documents/Flask_Tutorial/venv"
+set -gx VIRTUAL_ENV "/Users/kushpatel/Documents/GitHub/spongebob-bot/venv"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH
