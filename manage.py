@@ -23,7 +23,7 @@ def alternate_case(x, y):
     else:
         return y.upper()
 
-@app.route('/challenge')
+@app.route('/challenge/')
 def challenge():
     token = request.args.get('challenge')
     return {'id': token }
