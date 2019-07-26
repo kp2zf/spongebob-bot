@@ -26,4 +26,4 @@ def alternate_case(x, y):
 @app.route('/challenge/')
 def challenge():
     token = request.args.get('challenge')
-    return {'id': token }
+    return {'challenge': token }
