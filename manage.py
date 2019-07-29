@@ -1,16 +1,29 @@
 from flask import Flask, request
 import json
-# from slackclient import SlackClient
 
 app = Flask(__name__)
-# slack_client = SlackClient('SLACK_TOKEN')
-# slack_client.api_call("api.test")
 
 @app.route('/', methods=['GET', 'POST'])
 def response():
-    phrase = request.args.get('key')
-    new_phrase = create_mocking_string(phrase)
-    return {'key': new_phrase }
+    # phrase = request.args.get('key')
+    # new_phrase = create_mocking_string(phrase)
+    # return {'key': new_phrase }
+    try:
+        body = json.loads(request.data)
+        if body['type'] == 'challenge':
+           return challange_handler(body)
+        elif body['type'] == 'event_callback':
+            return event_handler(body)
+        else:
+            raise Exception("Error: Incorrect Type")
+    except Exception as e:
+        return ("error:" + str(e), 400)
+
+def event_handler(body):
+    return body
+
+def challange_handler(body):
+    return {'challenge': body['challenge'] }
 
 def create_mocking_string(phrase):
     new_phrase = ""
@@ -23,13 +36,3 @@ def alternate_case(x, y):
         return y.lower()
     else:
         return y.upper()
-
-@app.route('/challenge/', methods=['GET', 'POST'])
-def challenge():
-    body = json.loads(request.data)
-    return {'challenge': body['challenge'] }
-
-# var myjson = request.args
-# var obj = JSON.parse(myjson);
-# var cooldrinknames = [];
-# cooldrinknames.push(obj.cooldrinkname);
