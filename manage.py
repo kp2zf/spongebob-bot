@@ -25,7 +25,7 @@ def alternate_case(x, y):
 
 @app.route('/challenge/', methods=['GET', 'POST'])
 def challenge():
-    body = request.json
+    body = request.data
     return {'challenge': body.challenge }
 
 # var myjson = request.args
