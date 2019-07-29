@@ -5,13 +5,11 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
 def response():
-    # phrase = request.args.get('key')
-    # new_phrase = create_mocking_string(phrase)
-    # return {'key': new_phrase }
     try:
         body = json.loads(request.data)
+        print(body['type'])
         if body['type'] == 'url_verification':
-           return challange_handler(body)
+           return challenge_handler(body)
         elif body['type'] == 'event_callback':
             return event_handler(body)
         else:
@@ -20,10 +18,10 @@ def response():
         return ("error:" + str(e), 400)
 
 def event_handler(body):
-    return body
+    return create_mocking_string(body["event"]["text"])
 
-def challange_handler(body):
-    return body
+def challenge_handler(body):
+    return body["challenge"]
 
 def create_mocking_string(phrase):
     new_phrase = ""
