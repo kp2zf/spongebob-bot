@@ -25,5 +25,10 @@ def alternate_case(x, y):
 
 @app.route('/challenge/', methods=['GET', 'POST'])
 def challenge():
-    token = request.get('challenge')
-    return {'challenge': token }
+    body = request.json
+    return {'challenge': body.challenge }
+
+# var myjson = request.args
+# var obj = JSON.parse(myjson);
+# var cooldrinknames = [];
+# cooldrinknames.push(obj.cooldrinkname);
