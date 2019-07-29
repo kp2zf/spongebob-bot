@@ -23,7 +23,7 @@ def event_handler(body):
     return body
 
 def challange_handler(body):
-    return {'challenge': body['challenge'] }
+    return body
 
 def create_mocking_string(phrase):
     new_phrase = ""
