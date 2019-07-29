@@ -10,7 +10,7 @@ def response():
     # return {'key': new_phrase }
     try:
         body = json.loads(request.data)
-        if body['type'] == 'challenge':
+        if body['type'] == 'url_verification':
            return challange_handler(body)
         elif body['type'] == 'event_callback':
             return event_handler(body)
