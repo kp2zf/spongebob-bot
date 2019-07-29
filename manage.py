@@ -1,4 +1,5 @@
 from flask import Flask, request
+import json
 # from slackclient import SlackClient
 
 app = Flask(__name__)
@@ -25,7 +26,7 @@ def alternate_case(x, y):
 
 @app.route('/challenge/', methods=['GET', 'POST'])
 def challenge():
-    body = request.data
+    body = json.loads(request.data)
     return {'challenge': body.challenge }
 
 # var myjson = request.args
