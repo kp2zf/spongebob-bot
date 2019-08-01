@@ -8,6 +8,7 @@ slack_token = os.environ["SLACK_API_TOKEN"]
 client = slack.WebClient(token=slack_token)
 
 app = Flask(__name__)
+emoji_count = 0
 
 spongebob_mocked_messages = []
 
@@ -15,27 +16,24 @@ spongebob_mocked_messages = []
 def response():
     try:
         body = json.loads(request.data)
-
         if body['type'] == 'url_verification':
            return challenge_handler(body)
-
         elif body['type'] == 'event_callback':
             if body['event']['type'] == "reaction_added":
                 if body['event']['reaction'] == 'mocking_spongebob':
                     if body['event']['item']['type'] == "message":
-                        message_channel = body['event']['item']['channel']
-                        message = getMessage(body, message_channel)
+                        message = getMessage(body)
                         if message:
-                            return reply_with_bot(message, message_channel)
+                            return reply_with_bot(message)
         return ""
     except Exception as e:
         return ("error:" + str(e), 400)
 
-def reply_with_bot(message_text, message_channel):
+def reply_with_bot(message_text):
     try:
         message = create_mocking_string(message_text)
         client.chat_postMessage(
-         channel=message_channel,
+         channel="CLR24RLP9",
          blocks=[
 	      {
 		       "type": "section",
@@ -50,10 +48,12 @@ def reply_with_bot(message_text, message_channel):
     except Exception as e:
         print(e)
 
-def getMessage(body, message_channel):
+
+def getMessage(body):
     try:
         channel_history_url = "https://slack.com/api/channels.history"
-        message_ts = float(body["event"][event_ts])
+        message_channel = body["event"]["item"]["channel"]
+        message_ts = float(body["event"]["item"]["ts"])
         five_min_messages = message_ts - 30000
         payload = {
                 'token': slack_token, 
@@ -62,12 +62,12 @@ def getMessage(body, message_channel):
             }
         r = requests.get(channel_history_url, params=payload)
         message_body = r.json()
-
         for x in message_body["messages"]:
             if(float(x["ts"]) == message_ts and x["client_msg_id"] not in spongebob_mocked_messages ):
-                spongebob_mocked_messages.append(x["client_msg_id"])                 
+                spongebob_mocked_messages.append(x["client_msg_id"])   
+                print("jwkbvjkdc")              
                 return x["text"]
-        
+        print("NO!")
         return False
     except Exception as e:
         print(e)
