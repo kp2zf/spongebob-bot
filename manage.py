@@ -53,7 +53,7 @@ def reply_with_bot(message_text, message_channel):
 def getMessage(body, message_channel):
     try:
         channel_history_url = "https://slack.com/api/channels.history"
-        message_ts = float(body["event"]["item"]["ts"])
+        message_ts = float(body["event"][event_ts])
         five_min_messages = message_ts - 30000
         payload = {
                 'token': slack_token, 
