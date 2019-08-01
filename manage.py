@@ -8,7 +8,6 @@ slack_token = os.environ["SLACK_API_TOKEN"]
 client = slack.WebClient(token=slack_token)
 
 app = Flask(__name__)
-emoji_count = 0
 
 spongebob_mocked_messages = []
 
@@ -16,24 +15,27 @@ spongebob_mocked_messages = []
 def response():
     try:
         body = json.loads(request.data)
+
         if body['type'] == 'url_verification':
            return challenge_handler(body)
+
         elif body['type'] == 'event_callback':
             if body['event']['type'] == "reaction_added":
                 if body['event']['reaction'] == 'grinning':
                     if body['event']['item']['type'] == "message":
-                        message = getMessage(body)
+                        message_channel = body['event']['item']['channel']
+                        message = getMessage(body, message_channel)
                         if message:
-                            return reply_with_bot(message)
+                            return reply_with_bot(message, message_channel)
         return ""
     except Exception as e:
         return ("error:" + str(e), 400)
 
-def reply_with_bot(message_text):
+def reply_with_bot(message_text, message_channel):
     try:
         message = create_mocking_string(message_text)
         client.chat_postMessage(
-         channel="CLR24RLP9",
+         channel=message_channel,
          blocks=[
 	      {
 		       "type": "section",
@@ -48,11 +50,9 @@ def reply_with_bot(message_text):
     except Exception as e:
         print(e)
 
-
-def getMessage(body):
+def getMessage(body, message_channel):
     try:
         channel_history_url = "https://slack.com/api/channels.history"
-        message_channel = body["event"]["item"]["channel"]
         message_ts = float(body["event"]["item"]["ts"])
         five_min_messages = message_ts - 30000
         payload = {
