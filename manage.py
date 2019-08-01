@@ -21,7 +21,7 @@ def response():
 
         elif body['type'] == 'event_callback':
             if body['event']['type'] == "reaction_added":
-                if body['event']['reaction'] == 'grinning':
+                if body['event']['reaction'] == 'mocking_spongebob':
                     if body['event']['item']['type'] == "message":
                         message_channel = body['event']['item']['channel']
                         message = getMessage(body, message_channel)
