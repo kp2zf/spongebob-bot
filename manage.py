@@ -54,7 +54,7 @@ def getMessage(body):
         channel_history_url = "https://slack.com/api/channels.history"
         message_channel = body["event"]["item"]["channel"]
         message_ts = float(body["event"]["item"]["ts"])
-        five_min_messages = message_ts - 30000
+        five_min_messages = message_ts - 300
         payload = {
                 'token': slack_token, 
                 'channel': message_channel, 
@@ -62,6 +62,7 @@ def getMessage(body):
             }
         r = requests.get(channel_history_url, params=payload)
         message_body = r.json()
+        print(message_body)
         for x in message_body["messages"]:
             if(float(x["ts"]) == message_ts and x["client_msg_id"] not in spongebob_mocked_messages ):
                 spongebob_mocked_messages.append(x["client_msg_id"])   
