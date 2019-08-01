@@ -10,6 +10,7 @@ python-dotenv = "*"
 flask = "*"
 gunicorn = "*"
 slackclient = "*"
+requests = "*"
 
 [requires]
 python_version = "3.7"
