@@ -55,7 +55,8 @@ def getMessage(body):
         channel_history_url = "https://slack.com/api/channels.history"
         message_channel = body["event"]["item"]["channel"]
         message_ts = float(body["event"]["item"]["ts"])
-        five_min_messages = message_ts - 300
+        current_ts = float(body["event"]["event_ts"])
+        five_min_messages = current_ts - 3600
         payload = {
                 'token': slack_token, 
                 'channel': message_channel, 
