@@ -10,7 +10,7 @@ client = slack.WebClient(token=slack_token)
 app = Flask(__name__)
 emoji_count = 0
 
-spongebob_mocked_messages = []
+spongebob_mocked_messages = {}
 
 @app.route('/', methods=['GET', 'POST'])
 def response():
@@ -31,6 +31,7 @@ def response():
 
 def reply_with_bot(message_text):
     try:
+        print(spongebob_mocked_messages)
         message = create_mocking_string(message_text)
         client.chat_postMessage(
          channel="CLR24RLP9",
@@ -65,10 +66,8 @@ def getMessage(body):
         print(message_body)
         for x in message_body["messages"]:
             if(float(x["ts"]) == message_ts and x["client_msg_id"] not in spongebob_mocked_messages ):
-                spongebob_mocked_messages.append(x["client_msg_id"])   
-                print("jwkbvjkdc")              
+                spongebob_mocked_messages[x["client_msg_id"]] = "value" 
                 return x["text"]
-        print("NO!")
         return False
     except Exception as e:
         print(e)
