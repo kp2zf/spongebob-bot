@@ -24,17 +24,17 @@ def response():
                     if body['event']['item']['type'] == "message":
                         message = getMessage(body)
                         if message:
-                            return reply_with_bot(message)
+                            return reply_with_bot(message, body)
         return ""
     except Exception as e:
         return ("error:" + str(e), 400)
 
-def reply_with_bot(message_text):
+def reply_with_bot(message_text, body):
     try:
-        print(spongebob_mocked_messages)
+        print(body["event"]["item"]["channel"])
         message = create_mocking_string(message_text)
         client.chat_postMessage(
-         channel="CLR24RLP9",
+         channel = body["event"]["item"]["channel"],
          blocks=[
 	      {
 		       "type": "section",
@@ -66,9 +66,20 @@ def getMessage(body):
         message_body = r.json()
         print(message_body)
         for x in message_body["messages"]:
-            if(float(x["ts"]) == message_ts and x["client_msg_id"] not in spongebob_mocked_messages ):
+             if(float(x["ts"]) == message_ts and x["client_msg_id"] not in spongebob_mocked_messages ):
                 spongebob_mocked_messages[x["client_msg_id"]] = "value" 
+                print(x["client_msg_id"])
                 return x["text"]
+            # if((float(x["ts"]) == message_ts):
+            #     if(x["client_msg_id"] not in spongebob_mocked_messages):
+            #         if(x["reactions"] == None):
+            #            spongebob_mocked_messages[x["client_msg_id"]] = "value"
+            #            return x["text"] 
+            
+            # if(x["reactions"] == None or x["reactions"][]):
+            #         spongebob_mocked_messages[x["client_msg_id"]] = "value"
+            #         return x["text"]
+
         return False
     except Exception as e:
         print(e)
