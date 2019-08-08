@@ -6,7 +6,9 @@ import json, os, slack, requests, redis
 
 slack_token = os.environ["SLACK_API_TOKEN"]
 client = slack.WebClient(token=slack_token)
-red = redis.Redis('localhost')
+# red = redis.Redis('localhost')
+redis_url = os.getenv('REDISTOGO_URL', 'redis://localhost:6379')
+red = redis.from_url(redis_url)
 message_dict = "message_history"
 
 app = Flask(__name__)
